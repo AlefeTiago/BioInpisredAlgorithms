@@ -8,6 +8,7 @@ import random
 import math
 import sys
 import time
+from auxiliarFunctions import flightCalendar, hoursToMinutes
 
 flights={}
 people = [('Lisbon', 'LIS'),
@@ -25,15 +26,4 @@ for fileReader in open("flights.txt"):
     flights[(origin, destiny)].append((departureTime, arriveTime, int(price)))
 print(flights)
 
-def flightCalendar(calendar):
-    flightId = -1
-    totalPrice = 0
-    for i in range(len(calendar)//2):
-        cityName,cityCode = people[i][0], people[i][1]
-        flightId += 1
-        departureFlight = flights[(cityCode, destiny)][calendar[flightId]]
-        totalPrice += departureFlight[2]
-        flightId += 1
-        flightBack = flights[(destiny, cityCode)][calendar[flightId]]
-        totalPrice += flightBack[2]
 
