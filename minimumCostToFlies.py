@@ -8,7 +8,7 @@ import random
 import math
 import sys
 import time
-from auxiliarFunctions import flightCalendar, hoursToMinutes
+from auxiliarFunctions import flightCalendar, hoursToMinutes, CostFunction
 
 flights={}
 people = [('Lisbon', 'LIS'),
@@ -16,7 +16,7 @@ people = [('Lisbon', 'LIS'),
           ('Paris', 'CDG'),
           ('Dublin', 'DUB'),
           ('Brussels', 'BRU'),
-          ('London', 'LHR')  ]
+          ('London', 'LHR')]
 
 destiny = 'FCO'
 
@@ -24,6 +24,10 @@ for fileReader in open("flights.txt"):
     origin, destiny, departureTime, arriveTime, price = fileReader.split(',')
     flights.setdefault((origin, destiny),[])
     flights[(origin, destiny)].append((departureTime, arriveTime, int(price)))
-print(flights)
+
+"""
+Testando as funcoes implementadas
+"""
+print(CostFunction([1,4, 3,1, 8,3, 6,3, 2,4, 5,3], people, flights))
 
 
