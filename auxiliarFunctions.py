@@ -69,7 +69,7 @@ def Mutation(people, pace, calendar):
     domain = [(0,9)] * (len(people)*2)
     gene = random.randint(0, len(domain)-1)
     mutant = calendar
-    if random.random() <0.05:
+    if random.random() < 0.05:
         if calendar[gene] != domain[gene][0]:
             mutant = calendar[0:gene] + [calendar[gene]-pace] + calendar[gene + 1:]
         else:
@@ -82,7 +82,7 @@ def CrossOver(people,chromossom1, chromossom2 ):
     gene = random.randint(1, len(domain)-2)
     return chromossom1[0:gene] + chromossom2[gene:]
 
-def GeneticAlgorithm(people,fitnessFunction, populationSize=100, pace=1, elitism=0.2, GenerationNumbers = 500):
+def GeneticAlgorithm(flights,people,fitnessFunction, populationSize=1000, pace=1, elitism=0.2, GenerationNumbers = 500):
     domain = [(0, 9)] * (len(people) * 2)
     population = []
     for i in range (populationSize):
@@ -91,7 +91,7 @@ def GeneticAlgorithm(people,fitnessFunction, populationSize=100, pace=1, elitism
     numberElitism = int(elitism * populationSize)
 
     for i in range(GenerationNumbers):
-        costs = [(fitnessFunction(chromossom), chromossom) for chromossom in population]
+        costs = [(fitnessFunction(chromossom,people,flights), chromossom) for chromossom in population]
         costs.sort()
         sortedChromossoms = [chromossom for (cost, chromossom) in costs]
         population = sortedChromossoms[0: numberElitism]
@@ -99,7 +99,10 @@ def GeneticAlgorithm(people,fitnessFunction, populationSize=100, pace=1, elitism
             chromossom1=random.randint(0, numberElitism)
             chromossom2 = random.randint(0, numberElitism)
             newChromossom=CrossOver(domain, sortedChromossoms[chromossom1],sortedChromossoms[chromossom2])
-            mutationNewChromossom = Mutation(domain, pace, newChromossom)
+            mutationNewChromossom = Mutation(people, pace, newChromossom)
             population.append(mutationNewChromossom)
-
+    result = costs[0][1]
+    flightCalendar(result
+                   ,people,
+                   flights)
     return costs[0][1]

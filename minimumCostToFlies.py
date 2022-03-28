@@ -8,7 +8,7 @@ import random
 import math
 import sys
 import time
-from auxiliarFunctions import flightCalendar, hoursToMinutes, CostFunction
+from auxiliarFunctions import flightCalendar, hoursToMinutes, CostFunction, GeneticAlgorithm
 
 flights={}
 people = [('Lisbon', 'LIS'),
@@ -25,9 +25,13 @@ for fileReader in open("flights.txt"):
     flights.setdefault((origin, destiny),[])
     flights[(origin, destiny)].append((departureTime, arriveTime, int(price)))
 
-"""
-Testando as funcoes implementadas
-"""
-print(CostFunction([1,4, 3,1, 8,3, 6,3, 2,4, 5,3], people, flights))
+for i in range(0,5):
+    GeneticAlgorithm(flights,people,CostFunction)
+
+
+
+
+
+
 
 
